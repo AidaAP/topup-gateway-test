@@ -12,6 +12,10 @@ jobs:
     steps:
       - id: list_projects
         run: gh project list --owner "AidaAP"
+      - id: list_project_fields
+        run: gh project field-list 2 --owner "AidaAP"
+      - id: list_project_items
+        run: gh project item-list 2 --owner "AidaAP"
       - id: add_to_project
         run: gh project item-add 2 --owner "AidaAP" --url "${{ github.event.issue.url }}"
 #      - id: checkout
