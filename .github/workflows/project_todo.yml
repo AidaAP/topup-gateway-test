@@ -24,9 +24,9 @@ jobs:
       - id: obtain_field_id
         run: echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
       - id: obtain_field_value_id
-        run: echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .options[] | select(.name=="⏳ Todo") | .id')" >> $GITHUB_ENV
+        run: echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .options[] | select(.name=="Todo") | .id')" >> $GITHUB_ENV
       - id: obtain_field_value_name
-        run: echo "FIELD_VALUE_NAME=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .options[] | select(.name=="⏳ Todo") | .name')" >> $GITHUB_ENV
+        run: echo "FIELD_VALUE_NAME=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .options[] | select(.name=="Todo") | .name')" >> $GITHUB_ENV
       - id: list_projects
         run: gh project list --owner "AidaAP"
       - id: list_project_fields
