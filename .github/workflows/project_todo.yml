@@ -17,8 +17,8 @@ jobs:
           fetch-depth: 0 # Required to retrieve tags
       - id: add_issue_to_project
         run: gh issue edit ${{ github.event.issue.number }} --add-project "topup-gateway-test"
-      - id: set_issue_status_todo
-        run: gh project item-edit --id ${{ github.event.issue.number }} --project-id 2 --field-id "Status" --text "⏳ Todo"
+      - id: project_view
+        run: gh project view 2
       - id: list_projects
         run: gh project list --owner "AidaAP"
       - id: list_project_fields
@@ -27,6 +27,8 @@ jobs:
         run: gh project item-list 2 --owner "AidaAP"
       - id: list_project_issues
         run: gh issue list --repo "AidaAP/topup-gateway-test"
+      - id: set_issue_status_todo
+        run: gh project item-edit --id ${{ github.event.issue.number }} --project-id 2 --field-id "Status" --text "⏳ Todo"
 #      - id: add_to_project
 #        run: gh project item-add 2 --owner "AidaAP" --url "${{ github.event.issue.url }}"
 #      - id: checkout
