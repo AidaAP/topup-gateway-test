@@ -1,0 +1,15 @@
+name: Project - Todo
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  automate-project-columns:
+    runs-on: [self-hosted, linux]
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.9.0
+        with:
+          project: topup-gateway
+          column: Todo
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
