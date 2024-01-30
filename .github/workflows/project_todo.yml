@@ -10,7 +10,7 @@ jobs:
     steps:
       - id: add_to_project
         run: |
-          echo "EVENT: ${{ github.event.url }}"
+          echo "URL: ${{ github.event.issue.url }}"
           gh project item-add 2 --owner AidaAP --url xxx
 #      - id: checkout
 #        name: Checkout
