@@ -10,6 +10,11 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GHPROJECT_TOKEN }}
     steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required to retrieve tags
       - id: list_projects
         run: gh project list --owner "AidaAP"
       - id: list_project_fields
