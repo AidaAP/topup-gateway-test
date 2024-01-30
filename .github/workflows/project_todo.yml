@@ -6,7 +6,7 @@ on:
 
 jobs:
   automate-project-columns:
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     steps:
       - uses: alex-page/github-project-automation-plus@v0.9.0
         with:
