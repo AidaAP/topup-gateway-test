@@ -15,24 +15,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to retrieve tags
-      - id: obtain_project_id
-        run: echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
-      - id: echo_1
-        run: echo "${PROJECT_ID}"
       - id: add_issue_to_project
         run: gh issue edit ${{ github.event.issue.number }} --add-project "topup-gateway-test"
+      - id: obtain_project_id
+        run: echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
       - id: obtain_issue_id
         run: echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .id')" >> $GITHUB_ENV
       - id: set_issue_status_todo
-        run: gh project item-edit --id "${ISSUE_ID}" --project-id "PVT_kwHOBTQzos4Abz96" --field-id "Status" --text "⏳ Todo"
-      - id: project_view
-        run: gh project view 2 --owner "AidaAP"
-      - id: list_projects
-        run: gh project list --owner "AidaAP"
-      - id: list_project_fields
-        run: gh project field-list 2 --owner "AidaAP"
-      - id: list_project_issues
-        run: gh issue list --repo "AidaAP/topup-gateway-test"
+        run: gh project item-edit --id "${ISSUE_ID}" --project-id "${PROJECT_ID}" --field-id "Status" --text "⏳ Todo"
 #      - id: add_to_project
 #        run: gh project item-add 2 --owner "AidaAP" --url "${{ github.event.issue.url }}"
 #      - id: checkout
