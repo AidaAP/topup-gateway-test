@@ -16,6 +16,8 @@ jobs:
         run: gh project field-list 2 --owner "AidaAP"
       - id: list_project_items
         run: gh project item-list 2 --owner "AidaAP"
+      - id: list_project_issues
+        run: gh issue list --repo "AidaAP/topup-gateway-test"
       - id: add_to_project
         run: gh project item-add 2 --owner "AidaAP" --url "${{ github.event.issue.url }}"
 #      - id: checkout
