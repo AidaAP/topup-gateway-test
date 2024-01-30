@@ -10,6 +10,8 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GHPROJECT_TOKEN }}
     steps:
+      - id: list_projects
+        run: gh project list --owner "AidaAP"
       - id: add_to_project
         run: gh project item-add 2 --owner "AidaAP" --url "${{ github.event.issue.url }}"
 #      - id: checkout
