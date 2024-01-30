@@ -18,7 +18,7 @@ jobs:
       - id: add_issue_to_project
         run: gh issue edit ${{ github.event.issue.number }} --add-project "topup-gateway-test"
       - id: set_issue_status_todo
-        run: gh project item-edit --id ${{ github.event.issue.number }} --project-id "topup-gateway-test" --field-id "Status" --text "⏳ Todo"
+        run: gh project item-edit --id ${{ github.event.issue.number }} --project-id 2 --field-id "Status" --text "⏳ Todo"
       - id: list_projects
         run: gh project list --owner "AidaAP"
       - id: list_project_fields
