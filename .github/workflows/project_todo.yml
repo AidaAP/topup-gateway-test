@@ -31,12 +31,6 @@ jobs:
         run: echo "${ISSUE_ID}"
       - id: echo_2
         run: echo "${IID}"
-      - id: list_project_items_3
-        run: echo 'ISSUE_ID='$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .id') >> $GITHUB_ENV
-      - id: echo_1
-        run: echo "${{ ENV.ISSUE_ID_1 }}"
-#      - id: echo_2
-#        run: echo "${{ ISSUE_ID_2 }}"
       - id: list_project_issues
         run: gh issue list --repo "AidaAP/topup-gateway-test"
       - id: set_issue_status_todo
