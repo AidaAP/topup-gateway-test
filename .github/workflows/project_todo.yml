@@ -25,6 +25,8 @@ jobs:
         run: echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
       - id: obtain_field_value_id
         run: echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .options[] | select(.name=="⏳ Todo") | .id')" >> $GITHUB_ENV
+      - id: obtain_field_value_name
+        run: echo "FIELD_VALUE_NAME=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .options[] | select(.name=="⏳ Todo") | .name')" >> $GITHUB_ENV
       - id: list_projects
         run: gh project list --owner "AidaAP"
       - id: list_project_fields
@@ -32,7 +34,7 @@ jobs:
       - id: list_project_issues
         run: gh issue list --repo "AidaAP/topup-gateway-test"
       - id: set_issue_status_todo
-        run: gh project item-edit --project-id "${PROJECT_ID}" --id "${ISSUE_ID}" --field-id "${FIELD_ID}" --single-select-option-id "${FIELD_VALUE_ID}"
+        run: gh project item-edit --project-id "${PROJECT_ID}" --id "${ISSUE_ID}" --field-id "${FIELD_ID}" --single-select-option-id "${FIELD_VALUE_NAME}"
 #      - id: add_to_project
 #        run: gh project item-add 2 --owner "AidaAP" --url "${{ github.event.issue.url }}"
 #      - id: checkout
