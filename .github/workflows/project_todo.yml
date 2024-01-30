@@ -15,8 +15,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to retrieve tags
-      - id: obtain_project_id
-        run: gh project list --owner "AidaAP" --format=json | jq '.items[] | select(.number==2)'
+      - id: obtain_project_id_1
+        run: gh project list --owner "AidaAP" --format=json
+      - id: obtain_project_id_2
+        run: gh project list --owner "AidaAP" --format=json | jq '.items[]'
 #        run: echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.items[] | select(.number==2) | .id')" >> $GITHUB_ENV
     #  - id: echo_1
     #    run: echo "${PROJECT_ID}"
