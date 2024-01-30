@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: alex-page/github-project-automation-plus@v0.9.0
         with:
-          project: topup-gateway
+          project: topup-gateway-test
           column: Todo
           repo-token: ${{ secrets.GITHUB_TOKEN }}
