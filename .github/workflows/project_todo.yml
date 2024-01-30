@@ -8,7 +8,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: .github/actions/project-automation
+      - uses: ./.github/actions/project-automation
         with:
           project: topup-gateway-test
           column: Todo
