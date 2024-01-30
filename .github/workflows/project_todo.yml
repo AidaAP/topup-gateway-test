@@ -32,7 +32,7 @@ jobs:
       - id: list_project_issues
         run: gh issue list --repo "AidaAP/topup-gateway-test"
       - id: set_issue_status_todo
-        run: gh project item-edit --project-id "${PROJECT_ID}" --id "${ISSUE_ID}" --field-id "${FIELD_ID}" --single-select-option-id "⏳ Todo"
+        run: gh project item-edit --project-id "${PROJECT_ID}" --id "${ISSUE_ID}" --field-id "${FIELD_ID}" --single-select-option-id "${FIELD_VALUE_ID}"
 #      - id: add_to_project
 #        run: gh project item-add 2 --owner "AidaAP" --url "${{ github.event.issue.url }}"
 #      - id: checkout
