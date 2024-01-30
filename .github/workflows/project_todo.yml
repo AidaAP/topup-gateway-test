@@ -25,6 +25,8 @@ jobs:
         run: gh project field-list 2 --owner "AidaAP"
       - id: list_project_items
         run: gh project item-list 2 --owner "AidaAP"
+      - id: list_project_items_2
+        run: gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .content.id'
       - id: list_project_issues
         run: gh issue list --repo "AidaAP/topup-gateway-test"
       - id: set_issue_status_todo
