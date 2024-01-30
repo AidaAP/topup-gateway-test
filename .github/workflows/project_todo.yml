@@ -24,13 +24,9 @@ jobs:
       - id: list_project_fields
         run: gh project field-list 2 --owner "AidaAP"
       - id: set_issue_id
-        run: |
-          ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .id')
-          echo "IID=${ISSUE_ID}" >> $GITHUB_ENV
+        run: echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .id')" >> $GITHUB_ENV
       - id: echo_1
         run: echo "${ISSUE_ID}"
-      - id: echo_2
-        run: echo "${IID}"
       - id: list_project_issues
         run: gh issue list --repo "AidaAP/topup-gateway-test"
       - id: set_issue_status_todo
