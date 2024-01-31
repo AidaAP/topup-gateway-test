@@ -20,15 +20,11 @@ jobs:
       - id: obtain_project_id
         run: echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
       - id: obtain_issue_id
-        run: echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .id')" >> $GITHUB_ENV
+        run: echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number=="${{ github.event.issue.number }}") | .id')" >> $GITHUB_ENV
       - id: obtain_field_id
         run: echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
       - id: obtain_field_value_id
         run: echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .options[] | select(.name=="Todo") | .id')" >> $GITHUB_ENV
-      - id: echo_field_value_id
-        run: |
-          echo "${FIELD_VALUE_ID}"
-          echo ${FIELD_VALUE_ID}
       - id: list_projects
         run: gh project list --owner "AidaAP"
       - id: list_project_fields
