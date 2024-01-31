@@ -16,11 +16,17 @@ jobs:
         with:
           fetch-depth: 0 # Required to retrieve tags
       - id: add_issue_to_project
-        run: gh issue edit ${{ github.event.issue.number }} --add-project "topup-gateway-test"
+        run:  |
+          echo "ISSUE_NUMBER - ${{ github.event.issue.number }}"
+          gh issue edit ${{ github.event.issue.number }} --add-project "topup-gateway-test"
       - id: obtain_project_id
-        run: echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
+        run:  |
+          echo "ISSUE_NUMBER - ${{ github.event.issue.number }}"
+          echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
       - id: obtain_issue_id
-        run: echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number=="${{ github.event.issue.number }}") | .id')" >> $GITHUB_ENV
+        run: |
+          echo "ISSUE_NUMBER - ${{ github.event.issue.number }}"
+          echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number=="${{ github.event.issue.number }}") | .id')" >> $GITHUB_ENV
       - id: obtain_field_id
         run: echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
       - id: obtain_field_value_id
