@@ -28,7 +28,7 @@ jobs:
       - id: obtain_field_id
         run: echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
       - id: obtain_field_value_id
-        run: echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .options[] | select(.name=="Todo") | .id')" >> $GITHUB_ENV
+        run: echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq -r '.fields[] | select(.name=="Status") | .options[] | select(.name=="Todo") | .id')" >> $GITHUB_ENV
       - id: set_card_status_todo
         run: gh project item-edit --project-id "${PROJECT_ID}" --id "${ISSUE_ID}" --field-id "${FIELD_ID}" --single-select-option-id ${FIELD_VALUE_ID}
 
