@@ -20,7 +20,7 @@ jobs:
       - id: obtain_project_id
         run: echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
       - id: obtain_issue_id
-        run: echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[]')" >> $GITHUB_ENV
+        run: gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[]'
 #        run: echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number=="${{ github.event.issue.number }}") | .id')" >> $GITHUB_ENV
       - id: obtain_field_id
         run: echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
