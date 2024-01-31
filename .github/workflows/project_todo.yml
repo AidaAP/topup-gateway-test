@@ -15,20 +15,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to retrieve tags
-#      - id: item_list_1
-#        run: gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[]'
       - id: add_card
         run: gh project item-add 2 --owner "AidaAP" --url "${{ github.event.issue.html_url }}"
-#      - id: item_list_2
-#        run: gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[]'
-      - id: obtain_project_id
-        run: echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
-      - id: obtain_issue_id
-        run: echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .id')" >> $GITHUB_ENV
-      - id: obtain_field_id
-        run: echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
-      - id: obtain_field_value_id
-        run: echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq -r '.fields[] | select(.name=="Status") | .options[] | select(.name=="Todo") | .id')" >> $GITHUB_ENV
+      - id: obtain_ids
+        run: |
+          echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
+          echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .id')" >> $GITHUB_ENV
+          echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
+          echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq -r '.fields[] | select(.name=="Status") | .options[] | select(.name=="⏳ Todo") | .id')" >> $GITHUB_ENV
       - id: set_card_status_todo
         run: gh project item-edit --project-id "${PROJECT_ID}" --id "${ISSUE_ID}" --field-id "${FIELD_ID}" --single-select-option-id ${FIELD_VALUE_ID}
 
