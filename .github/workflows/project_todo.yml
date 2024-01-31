@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0 # Required to retrieve tags
       - id: add_project_item
-        run: gh project item-add 2 --owner "AidaAP" --url ${{ github.event.issue.url }}
+        run: gh project item-add 2 --owner "AidaAP" --url ${{ github.event.issue.html_url }}
 #      - id: add_issue_to_project
 #        run: gh issue edit ${{ github.event.issue.number }} --add-project "topup-gateway-test"
 #      - id: obtain_project_id
