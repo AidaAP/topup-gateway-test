@@ -1,0 +1,27 @@
+name: Project card - 🔍 Review
+
+on:
+  pull_request:
+    types: [ready_for_review]
+
+jobs:
+  automate-project-columns:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GHPROJECT_TOKEN }}
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required to retrieve tags
+      - id: echo
+        run: echo ${{ github.event.pull_request }}
+#      - id: obtain_ids
+#        run: |
+#          echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
+#          echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ github.event.issue.number }}) | .id')" >> $GITHUB_ENV
+#          echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
+#          echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq -r '.fields[] | select(.name=="Status") | .options[] | select(.name=="🔍 Review") | .id')" >> $GITHUB_ENV
+#      - id: set_card_status_in_progress
+#        run: gh project item-edit --project-id "${PROJECT_ID}" --id "${ISSUE_ID}" --field-id "${FIELD_ID}" --single-select-option-id ${FIELD_VALUE_ID}
