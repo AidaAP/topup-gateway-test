@@ -2,7 +2,7 @@ name: Project card - 🔍 Review
 
 on:
   pull_request:
-    types: [created, ready_for_review]
+    types: [opened, ready_for_review]
 
 jobs:
   automate-project-columns:
