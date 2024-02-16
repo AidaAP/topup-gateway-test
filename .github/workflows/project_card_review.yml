@@ -29,7 +29,7 @@ jobs:
           echo "FIELD_VALUE_ID: ${FIELD_VALUE_ID}"
       - id: obtain_issue_id
         run: |
-          echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number=="${ISSUE_NUMBER}") | .id')" >> $GITHUB_ENV
+          echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${ISSUE_NUMBER}) | .id')" >> $GITHUB_ENV
       - id: echo2
         run: |
           echo "ISSUE_ID: ${ISSUE_ID}"
