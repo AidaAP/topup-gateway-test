@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0 # Required to retrieve tags
       - id: echo
         run: |
-          echo ${{ github.event.pull_request.title }}
+          echo "${{ github.event.pull_request.title }}"
           echo ${{ github.event.pull_request.user.name }}
           echo ${{ github.event.pull_request.user.email }}
           echo ${{ github.event.pull_request.user.login }}
