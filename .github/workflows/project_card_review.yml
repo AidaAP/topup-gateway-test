@@ -16,27 +16,27 @@ jobs:
         with:
           fetch-depth: 0 # Required to retrieve tags
       - id: echo
-        run: | 
-          echo ${{ github.event.action }}
-          echo ${{ github.event.enterprise }}
-          echo ${{ github.event.installation }}
-          echo ${{ github.event.number }}
-          echo ${{ github.event.organization }}
-          echo ${{ github.event.pull_request.url }}
-          echo ${{ github.event.pull_request.id }}
-          echo ${{ github.event.pull_request.node_id }}
-          echo ${{ github.event.pull_request.html_url }}
-          echo ${{ github.event.pull_request.diff_url }}
-          echo ${{ github.event.pull_request.patch_url }}
-          echo ${{ github.event.pull_request.issue_url }}
-          echo ${{ github.event.pull_request.commits_url }}
-          echo ${{ github.event.pull_request.review_comments_url }}
-          echo ${{ github.event.pull_request.review_comment_url }}
-          echo ${{ github.event.pull_request.comments_url }}
-          echo ${{ github.event.pull_request.statuses_url }}
-          echo ${{ github.event.pull_request.number }}
-          echo ${{ github.event.pull_request.state }}
-          echo ${{ github.event.pull_request.locked }}
+        run: |
+#          echo ${{ github.event.action }} # opened
+#          echo ${{ github.event.enterprise }} #
+#          echo ${{ github.event.installation }} #
+#          echo ${{ github.event.number }} # 95
+#          echo ${{ github.event.organization }} #
+#          echo ${{ github.event.pull_request.url }} # https://api.github.com/repos/AidaAP/topup-gateway-test/pulls/95
+#          echo ${{ github.event.pull_request.id }} # 1729341372
+#          echo ${{ github.event.pull_request.node_id }} # PR_kwDOLLb96M5nE6e8
+#          echo ${{ github.event.pull_request.html_url }} # https://github.com/AidaAP/topup-gateway-test/pull/95
+#          echo ${{ github.event.pull_request.diff_url }} # https://github.com/AidaAP/topup-gateway-test/pull/95.diff
+#          echo ${{ github.event.pull_request.patch_url }} # https://github.com/AidaAP/topup-gateway-test/pull/95.patch
+#          echo ${{ github.event.pull_request.issue_url }} # https://api.github.com/repos/AidaAP/topup-gateway-test/issues/95
+#          echo ${{ github.event.pull_request.commits_url }} # https://api.github.com/repos/AidaAP/topup-gateway-test/pulls/95/commits
+#          echo ${{ github.event.pull_request.review_comments_url }} # https://api.github.com/repos/AidaAP/topup-gateway-test/pulls/95/comments
+#          echo ${{ github.event.pull_request.review_comment_url }} # https://api.github.com/repos/AidaAP/topup-gateway-test/pulls/comments{/number}
+#          echo ${{ github.event.pull_request.comments_url }} # https://api.github.com/repos/AidaAP/topup-gateway-test/issues/95/comments
+#          echo ${{ github.event.pull_request.statuses_url }} # https://api.github.com/repos/AidaAP/topup-gateway-test/statuses/e5e7aac60e4b55dad551affe9e3e75c1e7a16cc5
+#          echo ${{ github.event.pull_request.number }} # 95
+#          echo ${{ github.event.pull_request.state }} # open
+#          echo ${{ github.event.pull_request.locked }} # false
           echo ${{ github.event.pull_request.title }}
           echo ${{ github.event.pull_request.user.name }}
           echo ${{ github.event.pull_request.user.email }}
