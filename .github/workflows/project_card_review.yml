@@ -26,6 +26,9 @@ jobs:
 
       - id: echo
         run: |
+          echo "REF: ${{ github.event.pull_request.head.ref }}"
+          echo "ISSUE_ID=$(echo ${{ github.event.pull_request.head.ref }} | cut -d "/" -f2 | cut -d "-" -f1)" >> $GITHUB_ENV
+          echo "ISSUE_ID: ${ISSUE_ID}"
           echo ${{ github.event.pull_request.head.label }}
           echo ${{ github.event.pull_request.head.ref }}
           echo ${{ github.event.pull_request.head.repo }}
