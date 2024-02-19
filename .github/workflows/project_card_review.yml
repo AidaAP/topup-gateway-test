@@ -35,7 +35,7 @@ jobs:
           echo "-----------------------------------------------------------------------------"
           echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue")')"
           echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | map(.id, .content.number | tostring)')"
+          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | map({"id":.id, "number":.content.number|tostring}) | select(.number=="${ISSUE_NUMBER}")')"
           echo "-----------------------------------------------------------------------------"
           echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number=="${ISSUE_NUMBER}")')"
           echo "-----------------------------------------------------------------------------"
