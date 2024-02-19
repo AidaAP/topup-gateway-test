@@ -39,6 +39,8 @@ jobs:
           echo "-----------------------------------------------------------------------------"
           echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number=="${ISSUE_NUMBER}")')"
           echo "-----------------------------------------------------------------------------"
+          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number=="93")')"
+          echo "-----------------------------------------------------------------------------"
           echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and (.content.number|tostring)=="${ISSUE_NUMBER}")')"
           echo "-----------------------------------------------------------------------------"
           echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and (.content.number | tostring)=="${ISSUE_NUMBER}")')"
