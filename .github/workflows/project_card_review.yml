@@ -29,13 +29,7 @@ jobs:
           echo "FIELD_VALUE_ID: ${FIELD_VALUE_ID}"
       - id: obtain_issue_id
         run: |
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json)"
-          echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[]')"
-          echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue")')"
-          echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring}')"
+          echo "${ISSUE_NUMBER}"
           echo "-----------------------------------------------------------------------------"
           echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number=="${ISSUE_NUMBER}")')"
           echo "-----------------------------------------------------------------------------"
