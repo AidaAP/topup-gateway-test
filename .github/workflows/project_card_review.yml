@@ -29,16 +29,13 @@ jobs:
           echo "FIELD_VALUE_ID: ${FIELD_VALUE_ID}"
       - id: obtain_issue_id
         run: |
-          ISSUE_NUM="${ISSUE_NUMBER}"
-          echo $ISSUE_NUM
+          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number} | select(.number=="$ISSUE_NUMBER")')"
           echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number} | select(.number=="$ISSUE_NUM")')"
+          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number} | select(.number==$ISSUE_NUMBER)')"
           echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number} | select(.number==$ISSUE_NUM)')"
+          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number=="$ISSUE_NUMBER")')"
           echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number=="$ISSUE_NUM")')"
-          echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number==$ISSUE_NUM)')"
+          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number==$ISSUE_NUMBER)')"
           echo "-----------------------------------------------------------------------------"
           echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number=="93")')"
           echo "-----------------------------------------------------------------------------"
