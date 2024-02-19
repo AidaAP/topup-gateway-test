@@ -19,26 +19,18 @@ jobs:
         run: |
           echo "PROJECT_ID=$(gh project list --owner "AidaAP" --format=json | jq '.projects[] | select(.number==2) | .id')" >> $GITHUB_ENV
           echo "ISSUE_NUMBER=$(echo ${{ github.event.pull_request.head.ref }} | cut -d '/' -f2 | cut -d '-' -f1)" >> $GITHUB_ENV
+          echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ env.ISSUE_NUMBER }}) | .id')" >> $GITHUB_ENV
           echo "FIELD_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq '.fields[] | select(.name=="Status") | .id')" >> $GITHUB_ENV
           echo "FIELD_VALUE_ID=$(gh project field-list 2 --owner "AidaAP" --format=json | jq -r '.fields[] | select(.name=="Status") | .options[] | select(.name=="🔍 Review") | .id')" >> $GITHUB_ENV
       - id: echo
         run: |
           echo "PROJECT_ID: ${PROJECT_ID}"
           echo "ISSUE_NUMBER: ${ISSUE_NUMBER}"
+          echo "ISSUE_ID: ${ISSUE_ID}"
           echo "FIELD_ID: ${FIELD_ID}"
           echo "FIELD_VALUE_ID: ${FIELD_VALUE_ID}"
       - id: obtain_issue_id
         run: |
-          echo "PRIMERO: $(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number} | select(.number==${{ env.ISSUE_NUMBER }})')"
-          echo "-----------------------------------------------------------------------------"
-          echo "SEGUNDO: $(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number=="${{ env.ISSUE_NUMBER }}")')"
-          echo "-----------------------------------------------------------------------------"
-          echo "TERCERO: $(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue") | {"id": .id, "number": .content.number | tostring} | select(.number=="93")')"
-          echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and (.content.number|tostring)=="${ISSUE_NUMBER}")')"
-          echo "-----------------------------------------------------------------------------"
-          echo "$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and (.content.number | tostring)=="${ISSUE_NUMBER}")')"
-          echo "-----------------------------------------------------------------------------"
           echo "ISSUE_ID=$(gh project item-list 2 --owner "AidaAP" --format=json | jq '.items[] | select(.content.type=="Issue" and .content.number==${{ env.ISSUE_NUMBER }}) | .id')" >> $GITHUB_ENV
       - id: echo2
         run: |
